@@ -383,5 +383,3 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
 
 
 
-
-
