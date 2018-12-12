@@ -97,12 +97,12 @@ unitest <- function(g, lb, ub) {
   delta <- (ub - lb)/100
   x <- seq(lb + delta, ub - delta, by = delta)
   derives <- derive(x, g)
-  print(derives)
+  #print(derives)
   
   t <- rep(0,length(x))
-  print(t)
+  #print(t)
   finalreturn <- all.equal(t, derives)
-  print(finalreturn)
+  #print(finalreturn)
   if (finalreturn == TRUE) {
     uniformcase <- TRUE
   } else {
@@ -312,14 +312,14 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   
   
   unitest <- unitest(g, init_bound[1], init_bound[2])
-  print(unitest)
+  #print(unitest)
   if(unitest == TRUE) {
     x_all <- runif(n,init_bound[1],init_bound[2])
     return(x_all)
   }
   
   unitest <- unitest(h, init_bound[1], init_bound[2])
-  print(unitest)
+  #print(unitest)
   if(unitest == TRUE) {
     x_all <- runif(n,init_bound[1],init_bound[2])
     return(exp(x_all))
@@ -331,7 +331,7 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   xt <- seq(init_bound[1], init_bound[2],length.out = 200)
   dhk.test <- derive(xt, h)
   
-  print(dhk.test)
+  #print(dhk.test)
   
   concavity = TRUE
   iter = 1
