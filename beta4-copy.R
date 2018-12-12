@@ -275,10 +275,10 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   assert_that(is.numeric(n), msg = "ERROR: n is not numeric in function ars")
   
   #log of the original function
-  h <- function(x){
+    h <- function(x){
     return(log(g(x)))
   }
-  
+
   
   #find starting x_k
   if(lb == -Inf | ub == Inf){
@@ -292,20 +292,20 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   
   
   
-  # test for log concavity 
-  xt <- seq(init_bound[1], init_bound[2],length.out = 200)
-  dhk.test <- derive(xt, h)
-  
-  #print(dhk.test)
-  
-  concavity = TRUE
-  iter = 1
-  while(concavity & iter < length(dhk.test)-1){
-    assert_that(see_if(is.na(dhk.test[iter])==FALSE), msg = "ERROR: Change boundaries and try again.")
-    if(dhk.test[iter] >= dhk.test[iter+1]) {iter <- iter+1}
-    else {concavity = FALSE}
-  }
-  assert_that(see_if(concavity==TRUE), msg = "ERROR: g is not log-concave in function ars. Check function g and boundaries.")
+    # test for log concavity 
+    xt <- seq(init_bound[1], init_bound[2],length.out = 200)
+    dhk.test <- derive(xt, h)
+    
+    #print(dhk.test)
+    
+    concavity = TRUE
+    iter = 1
+    while(concavity & iter < length(dhk.test)-1){
+      assert_that(see_if(is.na(dhk.test[iter])==FALSE), msg = "ERROR: Change boundaries and try again.")
+      if(dhk.test[iter] >= dhk.test[iter+1]) {iter <- iter+1}
+      else {concavity = FALSE}
+    }
+    assert_that(see_if(concavity==TRUE), msg = "ERROR: g is not log-concave in function ars. Check function g and boundaries.")
   
   
   
@@ -383,4 +383,12 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
 
 
 
-
+G <- function(x) dchisq(x, 3)
+x <- ars(G,n = 1000)
+hist(x)
+# h0: our output and a random sample from the known distribution are drawn from the same distribution
+# if p value from ks test > 0.05, then we fail to reject the h0
+reject = TRUE
+if(ks.test(x, rchisq(1000, 3))$p.value > 0.05){
+  reject = FALSE
+}
