@@ -33,7 +33,7 @@ test_that("Test empirical distributions", {
   
   #3
   print("Now testing ars exp(1) and rexp(1): ")
-  out <- ars(function(x){dexp(x, 1)}, n=5000)
+  out <- ars(function(x){dexp(x, 1，0)}, n=100)
   pv <- ks.test(out, rexp(length(out), 1))$p.value
   print("KS test estimate p-value is: ")
   print(pv)
