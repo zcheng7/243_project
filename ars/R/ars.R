@@ -97,15 +97,12 @@ unitest <- function(g, lb, ub) {
   delta <- (ub - lb)/100
   x <- seq(lb + delta, ub - delta, by = delta)
   derives <- derive(x, g)
-  #derives <- derives[derives < max(max(derives),1)]
-  #derives <- derives[derives > min(min(derives),-1)]
-  
-  #print(derives)
+  print(derives)
   
   t <- rep(0,length(x))
-  #print(t)
+  print(t)
   finalreturn <- all.equal(t, derives)
-  #print(finalreturn)
+  print(finalreturn)
   if (finalreturn == TRUE) {
     uniformcase <- TRUE
   } else {
@@ -113,28 +110,6 @@ unitest <- function(g, lb, ub) {
   }
   return(uniformcase)
 }
-
-#exptest <- function(g, lb, ub) {
-#  h <- log(g)
-#  delta <- (ub - lb)/100
-#  x <- seq(lb + delta, ub - delta, by = delta)
-#  derives <- derive(x, g)
-#  derives <- derives[derives < max(derives)]
-#  derives <- derives[derives > min(derives)]
-  
-  #print(derives)
-  
-#  t <- rep(0,length(x)-2)
-  #print(t)
-#  finalreturn <- all.equal(t, derives)
-#  #print(finalreturn)
-#  if (finalreturn == TRUE) {
-#    uniformcase <- TRUE
-#  } else {
-#    uniformcase <- FALSE
-#  }
-#  return(uniformcase)
-#}
 
 
 ## Using function bounds, construct starting basis x-values to create z-values and envelope
@@ -337,14 +312,14 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   
   
   unitest <- unitest(g, init_bound[1], init_bound[2])
-  #print(unitest)
+  print(unitest)
   if(unitest == TRUE) {
     x_all <- runif(n,init_bound[1],init_bound[2])
     return(x_all)
   }
   
   unitest <- unitest(h, init_bound[1], init_bound[2])
-  #print(unitest)
+  print(unitest)
   if(unitest == TRUE) {
     x_all <- runif(n,init_bound[1],init_bound[2])
     return(exp(x_all))
@@ -356,7 +331,7 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   xt <- seq(init_bound[1], init_bound[2],length.out = 200)
   dhk.test <- derive(xt, h)
   
-  #print(dhk.test)
+  print(dhk.test)
   
   concavity = TRUE
   iter = 1
@@ -440,5 +415,3 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   return(new_sample)
   options(warn=0)
 }
-
-
