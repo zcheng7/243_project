@@ -287,7 +287,8 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
     init_bound <- c(lb, ub)
   }
   
-  
+  lb <- init_bound[1]
+  ub <- init_bound[2]
   
   
   
