@@ -2,7 +2,7 @@
 \alias{ars}
 \title{Adapative Rejection Sampling}
 \usage{
-ars(G, n, lb, ub, mode)
+ars(G, n, lb, ub)
 }
 \arguments{
 \item{G}{function g(x) that is proportional to the target density for sampling. This function must be log-concave}
@@ -12,8 +12,6 @@ ars(G, n, lb, ub, mode)
 \item{lb}{The lower bound for the function g(x). By default, the function assumes no lower bound (lb = -Inf).}
 
 \item{ub}{The upper bound for the function g(x). By default, the function assumes no upper bound (ub = Inf)}
-
-\item{mode}{The mode for the function g(x). By default, the function assumes a mode of 0}
 
 }
 \value{
