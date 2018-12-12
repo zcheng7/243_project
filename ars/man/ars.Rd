@@ -4,10 +4,10 @@
 \alias{ars}
 \title{Adaptive Rejection Sampling (ars) Function}
 \usage{
-ars(g, n, lb = -Inf, ub = Inf, mode = 0)
+ars(g, n, lb = -Inf, ub = Inf)
 }
 \arguments{
-\item{g}{probability density function, as a function of x (e.g. g <- function(x) dnorm(x,1,2))}
+\item{g}{probability density function, as a function of x (e.g. g <- function(x) dnorm(x,0,1))}
 
 \item{n}{number of values the final sample should contain}
 
