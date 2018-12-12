@@ -1,6 +1,6 @@
 library(testthat)
 library(ars)
-source('ars.R')
+#source('ars.R')
 
 test_that("test chisq(3)", {
   out <- ars(function(x){dchisq(x, df = 3)}, n=5000, lb=0)
