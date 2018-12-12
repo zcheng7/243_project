@@ -124,17 +124,17 @@ unitest <- function(g, lb, ub) {
   
   #print(derives)
   
-  t <- rep(0,length(x)-2)
+#  t <- rep(0,length(x)-2)
   #print(t)
-  finalreturn <- all.equal(t, derives)
-  #print(finalreturn)
-  if (finalreturn == TRUE) {
-    uniformcase <- TRUE
-  } else {
-    uniformcase <- FALSE
-  }
-  return(uniformcase)
-}
+#  finalreturn <- all.equal(t, derives)
+#  #print(finalreturn)
+#  if (finalreturn == TRUE) {
+#    uniformcase <- TRUE
+#  } else {
+#    uniformcase <- FALSE
+#  }
+#  return(uniformcase)
+#}
 
 
 ## Using function bounds, construct starting basis x-values to create z-values and envelope
