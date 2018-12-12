@@ -7,11 +7,11 @@ library(testthat)
 generate_zk <- function(x,h,lb,ub){  
   
   ## tests for inputs
-  assert_that(is.numeric(x), see_if(length(x)>0), msg = "ERROR: x is not a numeric in function generate_zk")
-  assert_that(is.function(h), msg = "ERROR: h is not a function in function generate_zk")
-  assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function generate_zk")
-  assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function generate_zk")
-  assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function generate_zk")
+  #assert_that(is.numeric(x), see_if(length(x)>0), msg = "ERROR: x is not a numeric in function generate_zk")
+  #assert_that(is.function(h), msg = "ERROR: h is not a function in function generate_zk")
+  #assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function generate_zk")
+  #assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function generate_zk")
+  #assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function generate_zk")
   
   k = length(x)
   x_j1 <- c(1e-8,x)
@@ -41,10 +41,10 @@ derive <- function(x, f){
 find_two_points <- function(h, lb, ub){
   mode <- optim(par=0, fn = h, method = "L-BFGS-B", lower = lb, upper = ub, control=list(fnscale=-1))$par
   ## tests for inputs
-  assert_that(is.function(h), msg = "ERROR: h is not a function in function find_two_points")
-  assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function find_two_points")
-  assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function find_two_points")
-  assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function find_two_points")
+  #assert_that(is.function(h), msg = "ERROR: h is not a function in function find_two_points")
+  #assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function find_two_points")
+  #assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function find_two_points")
+  #assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function find_two_points")
   
   
   ## If unbounded below, step from mode until derivative = 0, or 100
@@ -95,10 +95,10 @@ find_two_points <- function(h, lb, ub){
 init_basis_x <- function(h, lb, ub){
   
   ## tests for inputs
-  assert_that(is.function(h), msg = "ERROR: h is not a function in function init_basis_x")
-  assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function init_basis_x")
-  assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function init_basis_x")
-  assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function init_basis_x")
+  #assert_that(is.function(h), msg = "ERROR: h is not a function in function init_basis_x")
+  #assert_that(is.numeric(lb), msg = "ERROR: lb is not numeric in function init_basis_x")
+  #assert_that(is.numeric(ub), msg = "ERROR: ub is not numeric in function init_basis_x")
+  #assert_that(see_if(lb<ub), msg = "ERROR: lb should be smaller than ub in function init_basis_x")
   
   delta <- (ub - lb)/500
   max <- optimize(f = h, interval = c(lb, ub), lower = lb, upper = ub, maximum = TRUE)$maximum
@@ -128,10 +128,10 @@ init_basis_x <- function(h, lb, ub){
 lower_function <- function(x,h_k,dh_k,x_k){
   
   ## tests for inputs
-  assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function lower_function")
-  assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function lower_function")
-  assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function lower_function")
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function lower_function")  
+  #assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function lower_function")
+  #assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function lower_function")
+  #assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function lower_function")
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function lower_function")  
   
   if(x < min(x_k) | x > max(x_k)){
     return(-Inf)
@@ -149,11 +149,11 @@ lower_function <- function(x,h_k,dh_k,x_k){
 upper_function <- function(x,h_k,dh_k,x_k,z_k){
   
   ## tests for inputs
-  assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function upper_function")
-  assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function upper_function")
-  assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function upper_function")
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function upper_function") 
-  assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function upper_function") 
+  #assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function upper_function")
+  #assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function upper_function")
+  #assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function upper_function")
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function upper_function") 
+  #assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function upper_function") 
   
   i <- min(which(x < z_k)-1)
   upper_func <- h_k[i] + (x - x_k[i]) * dh_k[i]
@@ -163,11 +163,11 @@ upper_function <- function(x,h_k,dh_k,x_k,z_k){
 exp_upper <- function(x,h_k,dh_k,x_k,z_k){
   
   ## tests for inputs
-  assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function exp_upper")
-  assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function exp_upper")
-  assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function exp_upper")
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function exp_upper") 
-  assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function exp_upper") 
+  #assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function exp_upper")
+  #assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function exp_upper")
+  #assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function exp_upper")
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function exp_upper") 
+  #assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function exp_upper") 
   
   exp_up <- exp(upper_function(x,h_k,dh_k,x_k,z_k))
   return(exp_up)
@@ -179,13 +179,13 @@ exp_upper <- function(x,h_k,dh_k,x_k,z_k){
 generate_sample <- function(u,cum_env,h_k,x_k,dh_k,z_k,area){
   
   ## tests for inputs
-  assert_that(is.numeric(u), msg = "ERROR: u is not numeric in function generate_sample")
-  assert_that(is.numeric(cum_env), msg = "ERROR: cum_env is not numeric in function generate_sample")
-  assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function generate_sample") 
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function generate_sample") 
-  assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function generate_sample")
-  assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function generate_sample") 
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function generate_sample")
+  #assert_that(is.numeric(u), msg = "ERROR: u is not numeric in function generate_sample")
+  #assert_that(is.numeric(cum_env), msg = "ERROR: cum_env is not numeric in function generate_sample")
+  #assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function generate_sample") 
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function generate_sample") 
+  #assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function generate_sample")
+  #assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function generate_sample") 
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function generate_sample")
   
   j <- max(which(u > cum_env))
   if(dh_k[j] == 0){
@@ -212,12 +212,12 @@ generate_sample <- function(u,cum_env,h_k,x_k,dh_k,z_k,area){
 rej_test <- function(x, h_k, dh_k, x_k, z_k, h){
   
   ## tests for inputs
-  assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function rej_test")
-  assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function rej_test")
-  assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function rej_test")
-  assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function rej_test") 
-  assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function rej_test")
-  assert_that(is.function(h), msg = "ERROR: h is not a function in function rej_test")
+  #assert_that(is.numeric(x), msg = "ERROR: x is not numeric in function rej_test")
+  #assert_that(is.numeric(h_k), msg = "ERROR: h_k is not numeric in function rej_test")
+  #assert_that(is.numeric(dh_k), msg = "ERROR: dh_k is not numeric in function rej_test")
+  #assert_that(is.numeric(x_k), msg = "ERROR: x_k is not numeric in function rej_test") 
+  #assert_that(is.numeric(z_k), msg = "ERROR: z_k is not numeric in function rej_test")
+  #assert_that(is.function(h), msg = "ERROR: h is not a function in function rej_test")
   
   # Generate random seed
   w = runif(1)
