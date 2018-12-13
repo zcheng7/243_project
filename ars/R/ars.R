@@ -31,7 +31,8 @@ derive <- function(x, f){
   # tests for inputs
   assert_that(is.numeric(x), see_if(length(x)>0), msg = "ERROR: x is not a numeric in function derive")
   assert_that(is.function(f), msg = "ERROR: f is not a function in function derive")
-  
+  #print(f(x + 1e-8))
+  #print(f(x - 1e-8))
   return((f(x + 1e-8) - f(x - 1e-8))/2e-8)
 }
 
@@ -88,6 +89,32 @@ find_two_points <- function(h, lb, ub){
   return(c(lb, ub))
 }
 
+#test constant function. i.e. uniform
+#imput:function, lowerbound, upperbound
+#output: boolean T/F
+unitest <- function(g, lb, ub) {
+  
+  delta <- (ub - lb)/100
+  #print(delta)
+  x <- seq(lb + delta, ub - delta, by = delta)
+  #print(x)
+  derives <- derive(x, g)
+  #derives <- derives[derives < max(max(derives),1)]
+  #derives <- derives[derives > min(min(derives),-1)]
+  
+  #print(derives)
+  
+  t <- rep(0,length(x))
+  #print(t)
+  finalreturn <- all.equal(t, derives)
+  #print(finalreturn)
+  if (finalreturn == TRUE) {
+    uniformcase <- TRUE
+  } else {
+    uniformcase <- FALSE
+  }
+  return(uniformcase)
+}
 
 ## Using function bounds, construct starting basis x-values to create z-values and envelope
 ## input: logfunctionh, lowerbound, upperbound
@@ -274,6 +301,20 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   assert_that(is.function(g), msg = "ERROR: g is not a function in function ars. Try different lb and/or ub.")
   assert_that(is.numeric(n), msg = "ERROR: n is not numeric in function ars")
   
+  #test uniform
+  if(lb != -Inf & ub != Inf){
+    unitest <- unitest(g, lb, ub)
+    #print(unitest)
+    #print(unitest)
+    if(unitest == TRUE) {
+      x_all <- runif(n,lb,ub)
+      return(x_all)
+    }
+  }
+  
+  
+  
+  
   #log of the original function
   h <- function(x){
     return(log(g(x)))
@@ -381,5 +422,6 @@ ars <- function(g, n, lb = -Inf, ub = Inf){
   options(warn=0)
 }
 
-
-
+maxPoint <- try(optim(par=0.1, f = g, method = "L-BFGS-B", 
+                      lower = lb, upper = ub, control=list(fnscale=-1))$par,silent=TRUE)
+if(class(maxPoint)=="try-error") stop("Error in finding maximum, please input log-concave density function.")
